@@ -22,7 +22,12 @@
       "@/*": [
         "*"
       ]
-    }
+    },
+    "types": [
+      "vite/client",
+      "jest",
+      "node"
+    ],
   },
   "include": [
     "src"
