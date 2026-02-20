@@ -6,10 +6,11 @@ import { ThemeSync } from "./shared/theme/ThemeSync";
 import "./index.css";
 
 async function enableMocking() {
-  if (import.meta.env.DEV) {
-    const { worker } = await import("./mocks/browser");
-    return worker.start();
-  }
+  const { worker } = await import("./mocks/browser");
+
+  return worker.start({
+    onUnhandledRequest: "bypass",
+  });
 }
 
 function initTheme() {
@@ -20,11 +21,9 @@ function initTheme() {
 enableMocking().then(() => {
   initTheme();
   ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
-      <>
-        <ThemeSync />
-        <RouterProvider router={router} />
-      </>
-    </React.StrictMode>
+    <>
+      <ThemeSync />
+      <RouterProvider router={router} />
+    </>
   );
 });
