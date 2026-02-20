@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import type { Task } from "@/feature/tasks/tasks.type";
+import type { Task } from "../feature/tasks/tasks.type";
 import { getTasks, saveTasks } from "./storage";
 
 export const handlers = [
@@ -8,7 +8,6 @@ export const handlers = [
             username: string;
             password: string;
         };
-        console.log("🚀 ~ username, password:", username, password)
 
         if (username === "test" && password === "test123") {
             return res(

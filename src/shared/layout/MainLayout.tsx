@@ -8,10 +8,10 @@ interface MainLayoutProps {
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
             <Header />
 
-            <main className="flex-1 p-6 bg-gray-50">
+            <main className="flex-1 p-6 bg-gray-50 dark:bg-gray-900">
                 {children}
             </main>
 

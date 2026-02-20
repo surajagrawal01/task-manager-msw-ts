@@ -40,6 +40,7 @@ export default function Tooltip({ content, children }: Props) {
             bg-gray-700 text-white text-xs
             px-3 py-2 rounded-md shadow-xl
             max-w-xs break-words text-center
+            dark:bg-gray-600
           "
                 >
                     {content}

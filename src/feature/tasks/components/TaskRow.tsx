@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTasksStore } from "../tasks.store";
 import type { Task } from "../tasks.type";
 import TaskModal from "./TaskModal";
-import Tooltip from "@/shared/components/Tooltip";
+import Tooltip from "../../../shared/components/Tooltip";
 import { RefreshCcw, Pencil, Trash2 } from "lucide-react";
 
 interface Props {
@@ -25,29 +25,29 @@ export default function TaskRow({ task }: Props) {
 
     return (
         <>
-            <tr className="border-t hover:bg-gray-50">
+            <tr className="border-t border-gray-200 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700/50">
 
                 <td className="px-4 py-3 align-top">
 
                     <Tooltip content={task.title}>
-                        <div className="font-medium truncate">
+                        <div className="font-medium truncate text-gray-900 dark:text-gray-100">
                             {task.title}
                         </div>
                     </Tooltip>
 
-                    <div className="text-xs text-gray-400 mt-1 lg:hidden">
+                    <div className="text-xs text-gray-400 mt-1 lg:hidden dark:text-gray-500">
                         {formattedDate}
                     </div>
 
                     <Tooltip content={task.description}>
-                        <div className="mt-1 text-gray-500 text-sm truncate md:hidden">
+                        <div className="mt-1 text-gray-500 text-sm truncate md:hidden dark:text-gray-400">
                             {task.description || "No description"}
                         </div>
                     </Tooltip>
 
                 </td>
 
-                <td className="hidden md:table-cell px-4 py-3 text-gray-500">
+                <td className="hidden md:table-cell px-4 py-3 text-gray-500 dark:text-gray-400">
                     <Tooltip content={task.description}>
                         <div className="truncate">
                             {task.description || "No description"}
@@ -56,19 +56,19 @@ export default function TaskRow({ task }: Props) {
                 </td>
 
                 <td className="hidden lg:table-cell px-4 py-3">
-                    <span className="text-xs px-2 py-1 bg-gray-200 rounded-full whitespace-nowrap">
+                    <span className="text-xs px-2 py-1 bg-gray-200 rounded-full whitespace-nowrap dark:bg-gray-600 dark:text-gray-200">
                         {task.status}
                     </span>
                 </td>
 
-                <td className="hidden lg:table-cell px-4 py-3 text-gray-500">
+                <td className="hidden lg:table-cell px-4 py-3 text-gray-500 dark:text-gray-400">
                     {formattedDate}
                 </td>
 
                 <td className="px-4 py-3 text-right lg:hidden">
                     <div className="flex flex-col items-end gap-2">
 
-                        <span className="text-xs px-3 py-1 bg-gray-200 rounded-full whitespace-nowrap">
+                        <span className="text-xs px-3 py-1 bg-gray-200 rounded-full whitespace-nowrap dark:bg-gray-600 dark:text-gray-200">
                             {task.status}
                         </span>
 
@@ -106,21 +106,21 @@ export default function TaskRow({ task }: Props) {
                             onClick={() =>
                                 updateTask(task.id, { status: nextStatus })
                             }
-                            className="text-blue-600"
+                            className="text-blue-600 dark:text-blue-400"
                         >
                             <RefreshCcw className="w-4 h-4" />
                         </button>
 
                         <button
                             onClick={() => setIsEditOpen(true)}
-                            className="text-yellow-600"
+                            className="text-yellow-600 dark:text-yellow-400"
                         >
                             <Pencil className="w-4 h-4" />
                         </button>
 
                         <button
                             onClick={() => deleteTask(task.id)}
-                            className="text-red-600"
+                            className="text-red-600 dark:text-red-400"
                         >
                             <Trash2 className="w-4 h-4" />
                         </button>

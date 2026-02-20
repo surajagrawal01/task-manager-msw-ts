@@ -16,6 +16,7 @@ interface TasksState {
     createTask: (data: Omit<Task, "id" | "createdAt">) => Promise<void>;
     updateTask: (id: string, data: Partial<Task>) => Promise<void>;
     deleteTask: (id: string) => Promise<void>;
+    clearError: () => void;
 }
 
 export const useTasksStore = create<TasksState>((set) => ({
@@ -24,16 +25,18 @@ export const useTasksStore = create<TasksState>((set) => ({
     error: null,
 
     fetchTasks: async () => {
-        set({ loading: true });
+        set({ loading: true, error: null });
         try {
             const tasks = await fetchTasksApi();
             set({ tasks });
-        } catch (error) {
-            set({ error: (error as Error).message });
+        } catch (err) {
+            set({ error: (err as Error).message });
         } finally {
             set({ loading: false });
         }
     },
+
+    clearError: () => set({ error: null }),
 
     createTask: async (data) => {
         const newTask = await createTaskApi(data);

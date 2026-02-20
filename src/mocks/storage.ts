@@ -1,4 +1,4 @@
-import { Task } from "@/feature/tasks/tasks.type";
+import { Task } from "../feature/tasks/tasks.type";
 
 const STORAGE_KEY = "msw-tasks";
 

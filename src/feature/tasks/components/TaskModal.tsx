@@ -65,9 +65,9 @@ export default function TaskModal({ mode, task, onClose }: Props) {
         title.trim().length > 0 && description.trim().length > 0;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-            <div className="bg-white w-full max-w-md p-6 rounded shadow-lg">
-                <h2 className="text-xl font-semibold mb-4">
+        <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50 dark:bg-black/60">
+            <div className="bg-white w-full max-w-md p-6 rounded shadow-lg dark:bg-gray-800 dark:shadow-none">
+                <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
                     {mode === "create" ? "Create Task" : "Edit Task"}
                 </h2>
 
@@ -77,9 +77,9 @@ export default function TaskModal({ mode, task, onClose }: Props) {
                     <div>
                         <input
                             type="text"
-                            className={`w-full border p-2 rounded focus:outline-none focus:ring-2 ${errors.title
+                            className={`w-full border p-2 rounded focus:outline-none focus:ring-2 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 ${errors.title
                                 ? "border-red-500 focus:ring-red-300"
-                                : "focus:ring-blue-400"
+                                : "focus:ring-blue-400 border-gray-300"
                                 }`}
                             placeholder="Title"
                             value={title}
@@ -87,7 +87,7 @@ export default function TaskModal({ mode, task, onClose }: Props) {
                             autoFocus
                         />
                         {errors.title && (
-                            <p className="text-red-500 text-sm mt-1">
+                            <p className="text-red-500 text-sm mt-1 dark:text-red-400">
                                 {errors.title}
                             </p>
                         )}
@@ -96,9 +96,9 @@ export default function TaskModal({ mode, task, onClose }: Props) {
                     {/* Description */}
                     <div>
                         <textarea
-                            className={`w-full border p-2 rounded focus:outline-none focus:ring-2 ${errors.description
+                            className={`w-full border p-2 rounded focus:outline-none focus:ring-2 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600 ${errors.description
                                 ? "border-red-500 focus:ring-red-300"
-                                : "focus:ring-blue-400"
+                                : "focus:ring-blue-400 border-gray-300"
                                 }`}
                             placeholder="Description"
                             value={description}
@@ -107,7 +107,7 @@ export default function TaskModal({ mode, task, onClose }: Props) {
                             }
                         />
                         {errors.description && (
-                            <p className="text-red-500 text-sm mt-1">
+                            <p className="text-red-500 text-sm mt-1 dark:text-red-400">
                                 {errors.description}
                             </p>
                         )}
@@ -119,7 +119,7 @@ export default function TaskModal({ mode, task, onClose }: Props) {
                         onChange={(e) =>
                             setStatus(e.target.value as TaskStatus)
                         }
-                        className="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"
                     >
                         <option value="pending">Pending</option>
                         <option value="in-progress">
@@ -133,7 +133,7 @@ export default function TaskModal({ mode, task, onClose }: Props) {
                         <button
                             type="button"
                             onClick={onClose}
-                            className="px-4 py-2 border rounded hover:bg-gray-100"
+                            className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-200"
                         >
                             Cancel
                         </button>
@@ -142,8 +142,8 @@ export default function TaskModal({ mode, task, onClose }: Props) {
                             type="submit"
                             disabled={!isFormValid}
                             className={`px-4 py-2 text-white rounded transition ${isFormValid
-                                ? "bg-blue-600 hover:bg-blue-700"
-                                : "bg-blue-300 cursor-not-allowed"
+                                ? "bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+                                : "bg-blue-300 cursor-not-allowed dark:bg-blue-900/50"
                                 }`}
                         >
                             {mode === "create" ? "Create" : "Update"}
