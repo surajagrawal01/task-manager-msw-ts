@@ -1,18 +1,16 @@
-import { useState } from "react";
 import { useTasksStore } from "../tasks.store";
 import type { Task } from "../tasks.type";
-import TaskModal from "./TaskModal";
 import Tooltip from "../../../shared/components/Tooltip";
 import { RefreshCcw, Pencil, Trash2 } from "lucide-react";
 
 interface Props {
     task: Task;
+    onEdit: () => void;
 }
 
-export default function TaskRow({ task }: Props) {
+export default function TaskRow({ task, onEdit }: Props) {
     const deleteTask = useTasksStore((s) => s.deleteTask);
     const updateTask = useTasksStore((s) => s.updateTask);
-    const [isEditOpen, setIsEditOpen] = useState(false);
 
     const nextStatus =
         task.status === "pending"
@@ -83,7 +81,7 @@ export default function TaskRow({ task }: Props) {
                             </button>
 
                             <button
-                                onClick={() => setIsEditOpen(true)}
+                                onClick={onEdit}
                                 className="text-yellow-600"
                             >
                                 <Pencil className="w-4 h-4" />
@@ -112,7 +110,7 @@ export default function TaskRow({ task }: Props) {
                         </button>
 
                         <button
-                            onClick={() => setIsEditOpen(true)}
+                            onClick={onEdit}
                             className="text-yellow-600 dark:text-yellow-400"
                         >
                             <Pencil className="w-4 h-4" />
@@ -129,13 +127,7 @@ export default function TaskRow({ task }: Props) {
 
             </tr>
 
-            {isEditOpen && (
-                <TaskModal
-                    mode="edit"
-                    task={task}
-                    onClose={() => setIsEditOpen(false)}
-                />
-            )}
+
         </>
     );
 }
