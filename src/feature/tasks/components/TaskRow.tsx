@@ -21,6 +21,19 @@ export default function TaskRow({ task, onEdit }: Props) {
 
     const formattedDate = new Date(task.createdAt).toLocaleDateString();
 
+    const getStatusStyles = (status: string) => {
+        switch (status) {
+            case "completed":
+                return "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300";
+            case "in-progress":
+                return "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300";
+            case "pending":
+                return "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300";
+            default:
+                return "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200";
+        }
+    };
+
     return (
         <>
             <tr className="border-t border-gray-200 hover:bg-gray-50 dark:border-gray-600 dark:hover:bg-gray-700/50">
@@ -54,7 +67,11 @@ export default function TaskRow({ task, onEdit }: Props) {
                 </td>
 
                 <td className="hidden lg:table-cell px-4 py-3">
-                    <span className="text-xs px-2 py-1 bg-gray-200 rounded-full whitespace-nowrap dark:bg-gray-600 dark:text-gray-200">
+                    <span
+                        className={`text-xs px-2 py-1 rounded-full whitespace-nowrap font-medium ${getStatusStyles(
+                            task.status
+                        )}`}
+                    >
                         {task.status}
                     </span>
                 </td>
@@ -66,10 +83,13 @@ export default function TaskRow({ task, onEdit }: Props) {
                 <td className="px-4 py-3 text-right lg:hidden">
                     <div className="flex flex-col items-end gap-2">
 
-                        <span className="text-xs px-3 py-1 bg-gray-200 rounded-full whitespace-nowrap dark:bg-gray-600 dark:text-gray-200">
+                        <span
+                            className={`text-xs px-2 py-1 rounded-full whitespace-nowrap font-medium ${getStatusStyles(
+                                task.status
+                            )}`}
+                        >
                             {task.status}
                         </span>
-
                         <div className="flex gap-2">
                             <button
                                 onClick={() =>
