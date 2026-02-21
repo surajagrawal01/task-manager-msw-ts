@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAuthStore } from "@/feature/auth/auth.store";
+import { useAuthStore } from "./auth.store";
 
 export const NotFoundPage = () => {
     const token = useAuthStore((state) => state.token);
