@@ -9,7 +9,7 @@ export const Header = () => {
     const toggleTheme = useThemeStore((state) => state.toggleTheme);
 
     return (
-        <header className="bg-gray-800 text-white p-4 flex justify-between items-center dark:bg-gray-900">
+        <header className="bg-gray-800 text-white p-4 flex justify-between items-center dark:bg-gray-800 dark:text-gray-300">
             <Link to="/dashboard" className="font-bold hover:opacity-90">
                 Task Manager
             </Link>
