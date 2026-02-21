@@ -1,21 +1,35 @@
 /** @type {import('jest').Config} */
 module.exports = {
-    preset: "ts-jest",
     testEnvironment: "jsdom",
-
-    setupFilesAfterEnv: ["<rootDir>/src/tests/setup.ts"],
-
+    roots: ["<rootDir>/src"],
+    testMatch: ["**/__tests__/**/*.ts?(x)", "**/?(*.)+(spec|test).ts?(x)"],
     moduleNameMapper: {
         "^@/(.*)$": "<rootDir>/src/$1",
     },
-
+    setupFilesAfterEnv: ["<rootDir>/src/tests/setup.ts"],
     transform: {
-        "^.+\\.(ts|tsx)$": "ts-jest",
+        "^.+\\.tsx?$": [
+            "ts-jest",
+            {
+                useESM: false,
+                tsconfig: {
+                    jsx: "react-jsx",
+                    esModuleInterop: true,
+                    module: "commonjs",
+                    moduleResolution: "node",
+                    target: "ES2020",
+                },
+            },
+        ],
     },
-
-    globals: {
-        "ts-jest": {
-            tsconfig: "<rootDir>/tsconfig.app.json",
-        },
-    },
+    moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"],
+    collectCoverageFrom: [
+        "src/feature/auth/**/*.{ts,tsx}",
+        "src/feature/tasks/**/*.{ts,tsx}",
+        "!**/*.type.ts",
+        "!**/*.test.{ts,tsx}",
+        "!**/tests/**",
+    ],
+    coverageDirectory: "coverage",
+    coverageReporters: ["text", "lcov", "html"],
 };
